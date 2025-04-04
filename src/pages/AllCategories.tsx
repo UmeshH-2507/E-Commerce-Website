@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const AllCategories: FC = () => {
   const dispatch = useAppDispatch();
-
   const allCategories = useAppSelector(
     (state) => state.productReducer.categories
   );
@@ -22,21 +21,25 @@ const AllCategories: FC = () => {
   }, [allCategories, dispatch]);
 
   return (
-    <div className="container mx-auto min-h-[83vh] p-4 font-karla">
-      <span className="text-lg dark:text-white">Categories</span>
-      <div className="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2 my-2">
+    <div className="container mx-auto min-h-[83vh] p-6 font-karla">
+      <h2 className="text-3xl font-bold dark:text-white mb-6 text-center">🗂️ Browse Categories</h2>
+
+      <div className="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6">
         {allCategories &&
           allCategories.map((category) => (
             <div
               key={category.slug}
-              className="bg-gray-100 dark:bg-slate-600 dark:text-white px-4 py-4 font-karla mr-2 mb-2"
+              className="group bg-gradient-to-br from-gray-100 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl shadow-md hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 hover:scale-105 p-5 flex flex-col items-center text-center"
             >
-              <div className="text-lg">{category.name}</div>
+              <div className="text-xl font-semibold capitalize text-gray-800 dark:text-white group-hover:text-blue-500 transition duration-200">
+                {category.name}
+              </div>
+
               <Link
-                to={{ pathname: `/category/${category.slug}` }}
-                className="hover:underline text-blue-500"
+                to={`/category/${category.slug}`}
+                className="mt-3 text-sm font-medium text-blue-600 hover:underline dark:hover:text-blue-400 transition"
               >
-                View products
+                View Products →
               </Link>
             </div>
           ))}

@@ -55,27 +55,24 @@ const AllProducts: FC = () => {
   };
 
   return (
-    <div className="container mx-auto min-h-[83vh] p-4 font-karla">
-      <div className="grid grid-cols-4 gap-1">
-        <div className="col-span-4 space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="text-lg dark:text-white">Products</span>
-            <select
-              ref={sortRef}
-              className="border border-black dark:border-white rounded p-1 dark:text-white dark:bg-slate-600"
-              onChange={(e) => sortProducts(e.target.value)}
-            >
-              <option value="default">Default</option>
-              <option value="asc">Price (low to high)</option>
-              <option value="desc">Price (high to low)</option>
-            </select>
-          </div>
-          <div className="grid gap-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-            {currentProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
-          </div>
-        </div>
+    <div className="container mx-auto min-h-[83vh] p-6 font-karla">
+      <div className="flex flex-col md:flex-row items-center justify-between mb-6">
+        <h2 className="text-2xl font-semibold dark:text-white">Products</h2>
+        <select
+          ref={sortRef}
+          className="border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:text-white dark:bg-gray-800 transition-all hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+          onChange={(e) => sortProducts(e.target.value)}
+        >
+          <option value="default">Sort by: Default</option>
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
+        </select>
+      </div>
+
+      <div className="grid gap-6 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+        {currentProducts.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
       </div>
     </div>
   );

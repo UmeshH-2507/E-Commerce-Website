@@ -34,30 +34,31 @@ const ProductCard: FC<Product> = ({
           discountPercentage,
         })
       );
-      toast.success("item added to cart successfully", {
+      toast.success("Item added to cart successfully!", {
         duration: 3000,
       });
     });
   };
 
   return (
-    <div className="border border-gray-200 font-lato" data-test="product-card">
-      <div className="text-center border-b border-gray-200">
-        <Link to={{ pathname: `/product/${id}` }}>
+    <div className="relative group bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg border border-gray-300 dark:border-gray-700 rounded-xl shadow-lg transition-all hover:shadow-2xl hover:scale-[1.02] overflow-hidden">
+      <div className="relative text-center border-b border-gray-200 dark:border-gray-700">
+        <Link to={`/product/${id}`}>
           <img
             src={thumbnail}
             alt={title}
-            className="inline-block h-60 transition-transform duration-200 hover:scale-110"
+            className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-110 rounded-t-xl"
+            loading="lazy"
           />
         </Link>
       </div>
-      <div className="px-4 pt-4">
-        <p className="text-gray-500 text-[14px] font-medium dark:text-white">
+      <div className="p-4">
+        <p className="text-gray-500 text-sm font-medium dark:text-gray-300 uppercase">
           {category}
         </p>
         <Link
-          className="font-semibold hover:underline dark:text-white overflow-hidden text-ellipsis whitespace-nowrap block"
-          to={{ pathname: `/product/${id}` }}
+          className="font-semibold text-lg dark:text-white hover:text-blue-500 dark:hover:text-blue-400 transition duration-200 block truncate"
+          to={`/product/${id}`}
           title={title}
         >
           {title}
@@ -66,18 +67,20 @@ const ProductCard: FC<Product> = ({
       <div className="px-4">
         <RatingStar rating={rating} />
       </div>
-      <div className="flex flex-wrap items-center justify-between px-4 pb-4">
+      <div className="flex items-center justify-between px-4 pb-4">
         {discountPercentage && (
           <PriceSection discountPercentage={discountPercentage} price={price} />
         )}
         <button
           type="button"
-          className="flex items-center space-x-2 hover:bg-blue-500 text-white py-2 px-4 rounded bg-pink-500"
+          className="flex items-center gap-2 px-4 py-2 text-white bg-gradient-to-r from-pink-500 to-red-500 rounded-full shadow-md transition-all hover:from-red-500 hover:to-pink-500 hover:scale-105"
           onClick={addCart}
           data-test="add-cart-btn"
           title="ADD TO CART"
+          aria-label={`Add ${title} to cart`}
         >
-          <AiOutlineShoppingCart />
+          <AiOutlineShoppingCart className="text-lg" />
+          <span className="text-sm font-medium">Add to Cart</span>
         </button>
       </div>
     </div>

@@ -2,17 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthSlice } from "../../models/AuthSlice";
 
 interface LoginProps {
-  username: string;
-  password: string;
+  phone: string;
+  otp: string;
 }
 
 const initialState: AuthSlice = {
-  isLoggedIn:
-    localStorage.getItem("username") !== null &&
-    localStorage.getItem("username") !== undefined &&
-    localStorage.getItem("username") !== "",
+  isLoggedIn: localStorage.getItem("phone") !== null && localStorage.getItem("phone") !== "",
   modalOpen: false,
-  username: localStorage.getItem("username") ?? "",
+  phone: localStorage.getItem("phone") ?? "",
 };
 
 export const authSlice = createSlice({
@@ -20,27 +17,20 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     updateModal: (state, action: PayloadAction<boolean>) => {
-      return { ...state, modalOpen: action.payload };
+      state.modalOpen = action.payload;
     },
     doLogin: (state, action: PayloadAction<LoginProps>) => {
-      if (
-        action.payload.username === "atuny0" &&
-        action.payload.password === "9uQFF1Lh"
-      ) {
-        localStorage.setItem("username", "atuny0");
-        return {
-          ...state,
-          username: "atuny0",
-          modalOpen: false,
-          isLoggedIn: true,
-        };
-      } else {
-        return state;
+      if (action.payload.phone === "8050570067" && action.payload.otp === "000000") {
+        localStorage.setItem("phone", "8050570067");
+        state.phone = "8050570067";
+        state.modalOpen = false;
+        state.isLoggedIn = true;
       }
     },
     doLogout: (state) => {
-      localStorage.removeItem("username");
-      return { ...state, username: "", isLoggedIn: false };
+      localStorage.removeItem("phone");
+      state.phone = "";
+      state.isLoggedIn = false;
     },
   },
 });
